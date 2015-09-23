@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>BugLogMini: Connect</title>
+		<link href="../style.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript">
+			function initPage() {
+				serverInfo = parentSandboxBridge.doGetServerInfo();
+				
+				document.getElementById("server").value = serverInfo.server;
+				document.getElementById("username").value = serverInfo.username;
+				document.getElementById("password").value = serverInfo.password;
+				document.getElementById("rememberMe").checked = serverInfo.rememberMe;
+			}
+			
+			function doConnect(frm) {
+				var srv = document.getElementById("server");
+				var usr = document.getElementById("username");
+				var pwd = document.getElementById("password");
+				var rem = document.getElementById("rememberMe");
+				parentSandboxBridge.doConnect(srv.value,usr.value,pwd.value,rem.checked);
+			}
+		</script>		
+	</head>
+	<body onload="initPage()">
+		<form name="frm" method="post" action="" class="dataForm" id="frmConnect">
+			<table align="center">
+				<tr>
+					<td colspan="2" style="font-weight:bold;font-size:14px;padding-top:30px;padding-bottom:30px;">
+						Connect to a BugLog instance:
+					</td>
+				</tr>
+				<tr>
+					<td>Server:</td>
+					<td>
+						<span style="font-size:9px;">http://</span>
+						<input type="text" name="server" id="server" value="" class="formField" style="width:165px;" />
+					</td>
+				</tr>
+				<tr>
+					<td>User:</td>
+					<td><input type="text" name="username" id="username" value="" class="formField" /></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" id="password" value="" class="formField" /></td>
+				</tr>
+				<tr><td colspan="2" align="right">&nbsp;</td></tr>
+				<tr>
+					<td colspan="2">
+						<div style="float:right;">
+							<input type="button" value="Connect" name="btnConnect" onclick="doConnect(this.form)"/>
+						</div>
+						<input type="checkbox" name="rememberMe" id="rememberMe" value="1"> Remember me
+					</td>
+				</tr>
+			</table>
+			<div class="copyright">
+				<b>BugLog</b> and <b>BugLogMini</b> were created by 
+				<a href="#" onclick="parentSandboxBridge.doOpenURL('http://www.oscararevalo.com')">Oscar Arevalo</a>.
+				<br /><br />
+				Version 0.4
+			</div>
+		</form>
+	</body>
+</html>
